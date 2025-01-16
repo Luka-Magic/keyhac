@@ -64,27 +64,31 @@ def configure(keymap):
 	# capslockをUser1に割り当て
 	keymap.defineModifier(194, "User1")
 
-	# caps + (p, b, f, n) -> (up, left, right, down)
-	keymap_global["User1-P"] = "Up"
-	keymap_global["User1-B"] = "Left"
-	keymap_global["User1-F"] = "Right"
-	keymap_global["User1-N"] = "Down"
+	for modifier in ("", "S-", "C-", "A-", "C-S-", "C-A-", "S-A-", "C-A-S-"):
+		# caps + (p, b, f, n) -> (up, left, right, down)
+		keymap_global[modifier + "User1-P"] = modifier + "Up"
+		keymap_global[modifier + "User1-B"] = modifier + "Left"
+		keymap_global[modifier + "User1-F"] = modifier + "Right"
+		keymap_global[modifier + "User1-N"] = modifier + "Down"
 
-	# caps + (a, e) -> (home, end)
-	keymap_global["User1-A"] = "Home"
-	keymap_global["User1-E"] = "End"
+		# caps + (a, e) -> (home, end)
+		keymap_global[modifier + "User1-A"] = modifier +  "Home"
+		keymap_global[modifier + "User1-E"] = modifier +  "End"
 
-	# caps + (d, h) -> (delete, backspace)
-	keymap_global["User1-D"] = "Delete"
-	keymap_global["User1-H"] = "Back"
+		# caps + j -> Enter
+		keymap_global["User1-J"] = "Enter"
+	
+	# caps + l -> 一行選択
+	keymap_global["U1-L"] = "End", "S-Home"
 
 	# caps + k -> カーソルの後ろを全削除
 	keymap_global["User1-K"] = "S-End", "Back"
 	# caps + y -> カーソルの前を全削除
 	keymap_global["User1-Y"] = "S-Home", "Delete"
-	
-	# caps + j -> Enter
-	keymap_global["User1-J"] = "Enter"
+
+	# caps + (d, h) -> (delete, backspace)
+	keymap_global["User1-D"] = "Delete"
+	keymap_global["User1-H"] = "Back"
 
 	# caps + u -> _
 	keymap_global["User1-U"] = "S-Underscore"
