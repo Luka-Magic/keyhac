@@ -37,7 +37,7 @@ def configure(keymap):
 		setClipboardText(s)
 		delay()
 		keymap.InputKeyCommand("C-V")()
-
+	
 	def copy_string(sec = 0.05):
 		# 文字列をコピー
 		keymap.InputKeyCommand("C-C")()
@@ -78,6 +78,20 @@ def configure(keymap):
 		# caps + j -> Enter
 		keymap_global["User1-J"] = "Enter"
 	
+	# caps + ; -> [
+	keymap_global["User1-Semicolon"] = "OpenBracket"
+	# caps + : -> ]
+	keymap_global["User1-Colon"] = "CloseBracket"
+	# caps + shift + ; -> (
+	keymap_global["S-User1-Semicolon"] = "Shift-8"
+	# caps + shift + : -> )
+	keymap_global["S-User1-Colon"] = "Shift-9"
+
+	# caps + , -> '
+	keymap_global["User1-Comma"] = "Shift-7"
+	# caps + . -> "
+	keymap_global["User1-Period"] = "Shift-2"
+
 	# caps + l -> 一行選択
 	keymap_global["U1-L"] = "End", "S-Home"
 
