@@ -28,21 +28,21 @@ def configure(keymap):
 		# 遅延
 		time.sleep(sec)
 
-	def get_clippedText():
-		# クリップボードからテキストを取得
-		return (getClipboardText() or "")
+	# def get_clippedText():
+	# 	# クリップボードからテキストを取得
+	# 	return (getClipboardText() or "")
 
-	def paste_string(s):
-		# 文字列を貼り付け
-		setClipboardText(s)
-		delay()
-		keymap.InputKeyCommand("C-V")()
+	# # def paste_string(s):
+	# 	# 文字列を貼り付け
+	# 	setClipboardText(s)
+	# 	delay()
+	# 	keymap.InputKeyCommand("C-V")()
 	
-	def copy_string(sec = 0.05):
-		# 文字列をコピー
-		keymap.InputKeyCommand("C-C")()
-		delay(sec)
-		return get_clippedText()
+	# def copy_string(sec = 0.05):
+	# 	# 文字列をコピー
+	# 	keymap.InputKeyCommand("C-C")()
+	# 	delay(sec)
+	# 	return get_clippedText()
 
 	def send_input(ime_mode, keys, sleep = 0.01):
 		# キー入力を送信
@@ -110,6 +110,8 @@ def configure(keymap):
 	keymap_global["User1-I"] = "Minus"
 	# caps + o -> =
 	keymap_global["User1-O"] = "S-Minus"
+	# caps + w -> `
+	keymap_global["User1-W"] = "S-Atmark"
 
 	# caps + {i} -> F{i}
 	keymap_global[ "User1-1" ] = "F1"
@@ -181,7 +183,6 @@ def configure(keymap):
 	# RightCtrl -> 日本語入力
 	keymap_global["O-RCtrl"] = lambda: keymap.getWindow().setImeStatus(1)
 
-
 	#####   Chromeを開く   ########################################################
 	def find_window(arg_exe, arg_class):
 		wnd = pyauto.Window.getDesktop().getFirstChild()
@@ -198,8 +199,30 @@ def configure(keymap):
 			send_input(1, ["C-T", "C-K"])
 		else:
 			wnd = find_window("chrome.exe", "Chrome_WidgetWin_1")
+			  
+			 
 			if wnd:
 				send_input(1, ["C-LWin-1", "C-T", "C-K"], 0.05)
 			else:
 				send_input(1, ["LWin-1"])
 	keymap_global["User1-Q"] = google_search
+
+
+	# #####   Notionを開く   ########################################################
+	# def notion_search():
+	# 	if keymap.getWindow().getProcessName() == "notion.exe":
+	# 		send_input(1, ["C-T", "C-K"])
+	# 	else:
+	# 		wnd = find_window("notion.exe", "Chrome_WidgetWin_1")
+			  
+			 
+	# 		if wnd:
+	# 			send_input(1, ["C-LWin-1", "C-T", "C-K"], 0.05)
+	# 		else:
+	# 			send_input(1, ["LWin-1"])
+	# keymap_global["User1-Q"] = notion_search
+
+	#####   Sleep   ########################################################
+	def sleep():
+		send_input(1, ["LWin-X", "U", "S"], 1.0)
+	keymap_global["Pause"] = sleep
